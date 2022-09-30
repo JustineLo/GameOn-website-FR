@@ -49,8 +49,19 @@ submitBtn.addEventListener("click", function (event) {
 });
 
 // test if text fields are empty or less than 2 letters
-function isValidText(inputValue) {
-  return inputValue != null && inputValue.value.length >= 2
+function isValidText(input) {
+
+  const errorDiv = input.parentNode.insertBefore(document.createElement("div"), input.nextSibling)
+  if (input != null && input.value.length >= 2) {
+    console.log("ok")
+    return true
+  } else {
+    errorDiv.innerHTML = "Erreur"
+    errorDiv.style.color = 'red'
+    return false
+  }
+
+
 }
 
 // test if email is valid
