@@ -38,9 +38,35 @@ function closeModal() {
 
 // launch submit button event
 submitBtn.addEventListener("click", function (event) {
+  $isFormValid = true;
+
+  if (!isValidText(firstInput)) {
+    displayErrorMessage(firstInput)
+    $isFormValid = false;
+  }
+  if (!isValidText(lastInput)) {
+    displayErrorMessage(lastInput)
+    $isFormValid = false;
+  }
+  if (!isValidEmail()) {
+    displayErrorMessage(firstInput)
+    $isFormValid = false;
+  }
+  if (!isValidQuantity(quantityInput)) {
+    displayErrorMessage(firstInput)
+    $isFormValid = false;
+  }
+  if (!isValidText(firstInput)) {
+    displayErrorMessage(firstInput)
+    $isFormValid = false;
+  }
+  if (!isValidText(firstInput)) {
+    displayErrorMessage(firstInput)
+    $isFormValid = false;
+  }
+
   if (isValidText(firstInput) && isValidText(lastInput) && isValidQuantity(quantityInput) && isCityChecked() && isTermsChecked() && isValidEmail()) {
-
-
+    event.preventDefault();
     console.log("Submitted")
   } else {
     // prevent page from reloading
@@ -48,19 +74,32 @@ submitBtn.addEventListener("click", function (event) {
   }
 });
 
+function displayErrorMessage(input) {
+  const errorDiv = input.parentNode.insertBefore(document.createElement("div"), input.nextSibling)
+  errorDiv.setAttribute("id", input.id + "-error")
+  errorDiv.innerHTML = "Erreur"
+  errorDiv.style.color = 'red'
+}
+
+function removeErrorMessage(input) {
+  const errorDiv = document.getElementById(input.id + "-error")
+  if (errorDiv != null) {
+    errorDiv.remove()
+  }
+}
+
 // test if text fields are empty or less than 2 letters
 function isValidText(input) {
 
-  const errorDiv = input.parentNode.insertBefore(document.createElement("div"), input.nextSibling)
   if (input != null && input.value.length >= 2) {
-    console.log("ok")
+    removeErrorMessage(input)
     return true
   } else {
-    errorDiv.innerHTML = "Erreur"
-    errorDiv.style.color = 'red'
+    if (document.getElementById(input.id + "-error") === null) {
+      displayErrorMessage(input)
+    }
     return false
   }
-
 
 }
 
