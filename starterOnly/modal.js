@@ -41,35 +41,29 @@ submitBtn.addEventListener("click", function (event) {
   $isFormValid = true;
 
   if (!isValidText(firstInput)) {
-    displayErrorMessage(firstInput)
     $isFormValid = false;
   }
   if (!isValidText(lastInput)) {
-    displayErrorMessage(lastInput)
     $isFormValid = false;
   }
   if (!isValidEmail()) {
-    displayErrorMessage(firstInput)
     $isFormValid = false;
   }
   if (!isValidQuantity(quantityInput)) {
-    displayErrorMessage(firstInput)
     $isFormValid = false;
   }
-  if (!isValidText(firstInput)) {
-    displayErrorMessage(firstInput)
+  if (!isCityChecked()) {
     $isFormValid = false;
   }
-  if (!isValidText(firstInput)) {
-    displayErrorMessage(firstInput)
+  if (!isTermsChecked()) {
     $isFormValid = false;
   }
 
-  if (isValidText(firstInput) && isValidText(lastInput) && isValidQuantity(quantityInput) && isCityChecked() && isTermsChecked() && isValidEmail()) {
+  if ($isFormValid) {
     event.preventDefault();
     console.log("Submitted")
   } else {
-    // prevent page from reloading
+    // prevent page from reloading 
     event.preventDefault();
   }
 });
