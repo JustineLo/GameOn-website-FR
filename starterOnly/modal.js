@@ -68,10 +68,10 @@ submitBtn.addEventListener("click", function (event) {
   }
 });
 
-function displayErrorMessage(input) {
+function displayErrorMessage(input, message) {
   const errorDiv = input.parentNode.insertBefore(document.createElement("div"), input.nextSibling)
   errorDiv.setAttribute("id", input.id + "-error")
-  errorDiv.innerHTML = "Erreur"
+  errorDiv.innerHTML = message
   errorDiv.style.color = 'red'
 }
 
@@ -84,13 +84,12 @@ function removeErrorMessage(input) {
 
 // test if text fields are empty or less than 2 letters
 function isValidText(input) {
-
   if (input != null && input.value.length >= 2) {
     removeErrorMessage(input)
     return true
   } else {
     if (document.getElementById(input.id + "-error") === null) {
-      displayErrorMessage(input)
+      displayErrorMessage(input, "Veuillez entrer 2 caractères ou plus")
     }
     return false
   }
@@ -99,12 +98,28 @@ function isValidText(input) {
 
 // test if email is valid
 function isValidEmail() {
-  return emailInput != null && emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)
+  if (emailInput != null && emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
+    removeErrorMessage(emailInput)
+    return true
+  } else {
+    if (document.getElementById("email-error") === null) {
+      displayErrorMessage(emailInput, "Veuillez une adresse e-mail valide")
+    }
+    return false
+  }
 }
 
 // test is quantity is number
-function isValidQuantity(inputValue) {
-  return inputValue && inputValue.value.match(/^\d{1,}$/)
+function isValidQuantity() {
+  if (quantityInput != null && quantityInput.value.match(/^\d{1,}$/)) {
+    removeErrorMessage(quantityInput)
+    return true
+  } else {
+    if (document.getElementById("quantity-error") === null) {
+      displayErrorMessage(quantityInput, "Veuillez saisir un nombre")
+    }
+    return false
+  }
 }
 
 // test if a city checkbox is checked
@@ -120,8 +135,12 @@ function isCityChecked() {
 // test if terms checkbox is checked 
 function isTermsChecked() {
   if (termsCheckbox.checked) {
+    removeErrorMessage(termsCheckbox)
     return true;
   } else {
+    if (document.getElementById("checkbox1-error") === null) {
+      displayErrorMessage(termsCheckbox, "Vous devez vérifier que vous acceptez les termes et conditions")
+    }
     return false;
   }
 }
