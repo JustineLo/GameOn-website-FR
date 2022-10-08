@@ -16,6 +16,7 @@ const submitBtn = document.querySelector(".btn-submit")
 const firstInput = document.getElementById("first");
 const lastInput = document.getElementById("last");
 const emailInput = document.getElementById("email");
+const birthdateInput = document.getElementById("birthdate");
 const quantityInput = document.getElementById("quantity");
 const cities = document.querySelectorAll("input[type=radio]");
 const termsCheckbox = document.getElementById("checkbox1");
@@ -49,6 +50,11 @@ submitBtn.addEventListener("click", function (event) {
   if (!isValidEmail()) {
     $isFormValid = false;
   }
+
+  if (!isValidBirthdate()) {
+    $isFormValid = false;
+  }
+
   if (!isValidQuantity(quantityInput)) {
     $isFormValid = false;
   }
@@ -61,7 +67,10 @@ submitBtn.addEventListener("click", function (event) {
 
   if ($isFormValid) {
     event.preventDefault();
-    console.log("Submitted")
+    const validateMessage = submitBtn.parentNode.insertBefore(document.createElement("div"), submitBtn.nextSibling)
+    validateMessage.innerHTML = "Merci ! Votre réservation a été reçue."
+    validateMessage.style.color = 'green'
+
   } else {
     // prevent page from reloading 
     event.preventDefault();
@@ -69,17 +78,14 @@ submitBtn.addEventListener("click", function (event) {
 });
 
 function displayErrorMessage(input, message) {
-  const errorDiv = input.parentNode.insertBefore(document.createElement("div"), input.nextSibling)
-  errorDiv.setAttribute("id", input.id + "-error")
-  errorDiv.innerHTML = message
-  errorDiv.style.color = 'red'
+  const formData = input.parentNode;
+  formData.setAttribute("data-error-visible", true)
+  formData.setAttribute("data-error", message)
 }
 
 function removeErrorMessage(input) {
-  const errorDiv = document.getElementById(input.id + "-error")
-  if (errorDiv != null) {
-    errorDiv.remove()
-  }
+  const formData = input.parentNode;
+  formData.setAttribute("data-error-visible", false)
 }
 
 // test if text fields are empty or less than 2 letters
@@ -88,9 +94,7 @@ function isValidText(input) {
     removeErrorMessage(input)
     return true
   } else {
-    if (document.getElementById(input.id + "-error") === null) {
-      displayErrorMessage(input, "Veuillez entrer 2 caractères ou plus")
-    }
+    displayErrorMessage(input, "Veuillez entrer 2 caractères ou plus")
     return false
   }
 
@@ -102,10 +106,20 @@ function isValidEmail() {
     removeErrorMessage(emailInput)
     return true
   } else {
-    if (document.getElementById("email-error") === null) {
-      displayErrorMessage(emailInput, "Veuillez une adresse e-mail valide")
-    }
+    displayErrorMessage(emailInput, "Veuillez une adresse e-mail valide")
     return false
+  }
+}
+
+// test if birthdate is valid
+function isValidBirthdate() {
+  let date = new Date(birthdate.value).getTime();
+  if (isNaN(date) || Date.now() < date) {
+    displayErrorMessage(birthdateInput, "Veuillez saisir une date de naissance valide")
+    return false
+  } else {
+    removeErrorMessage(birthdateInput)
+    return true
   }
 }
 
@@ -115,9 +129,7 @@ function isValidQuantity() {
     removeErrorMessage(quantityInput)
     return true
   } else {
-    if (document.getElementById("quantity-error") === null) {
-      displayErrorMessage(quantityInput, "Veuillez saisir un nombre")
-    }
+    displayErrorMessage(quantityInput, "Veuillez saisir un nombre")
     return false
   }
 }
@@ -138,9 +150,7 @@ function isTermsChecked() {
     removeErrorMessage(termsCheckbox)
     return true;
   } else {
-    if (document.getElementById("checkbox1-error") === null) {
-      displayErrorMessage(termsCheckbox, "Vous devez vérifier que vous acceptez les termes et conditions")
-    }
+    displayErrorMessage(termsCheckbox, "Vous devez vérifier que vous acceptez les termes et conditions")
     return false;
   }
 }
