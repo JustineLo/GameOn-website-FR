@@ -138,9 +138,11 @@ function isValidQuantity() {
 function isCityChecked() {
   for (let i = 0; i < cities.length; i++) {
     if (cities[i].checked) {
+      removeErrorMessage(cities[i])
       return true;
     }
   }
+  displayErrorMessage(cities[0], "Veuillez cocher une ville")
   return false;
 }
 
