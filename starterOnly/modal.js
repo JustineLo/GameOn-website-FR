@@ -97,7 +97,6 @@ function isValidText(input) {
     displayErrorMessage(input, "Veuillez entrer 2 caractères ou plus")
     return false
   }
-
 }
 
 // test if email is valid
