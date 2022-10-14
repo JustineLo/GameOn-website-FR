@@ -75,8 +75,6 @@ img {
   display: none;
 }
 
-
-
 @media screen and (max-width: 768px) {
 
   .topnav {
@@ -537,7 +535,7 @@ footer {
   margin: 0 20px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 946px) {
   .hero-section {
     display: block;
     box-shadow: unset;
