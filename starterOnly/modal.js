@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelector(".close");
+const endCloseBtn = document.querySelector(".btn-close");
 const formData = document.querySelectorAll(".formData");
 const submitBtn = document.querySelector(".btn-submit")
 const firstInput = document.getElementById("first");
@@ -20,6 +21,8 @@ const birthdateInput = document.getElementById("birthdate");
 const quantityInput = document.getElementById("quantity");
 const cities = document.querySelectorAll("input[type=radio]");
 const termsCheckbox = document.getElementById("checkbox1");
+const formDiv = document.getElementsByName("reserve");
+const thankyouDiv = document.getElementById("thankyou-page");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -27,10 +30,15 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  thankyouDiv.style.display = "none";
+  formDiv[0].style.display = "block";
 }
 
 // launch close button event
 closeBtn.addEventListener("click", closeModal);
+
+// launch close button event after validation
+endCloseBtn.addEventListener("click", closeModal);
 
 // launch close modal
 function closeModal() {
@@ -66,12 +74,9 @@ submitBtn.addEventListener("click", function (event) {
   }
 
   event.preventDefault();
-
   if ($isFormValid) {
-    const validateMessage = submitBtn.parentNode.insertBefore(document.createElement("div"), submitBtn.nextSibling)
-    validateMessage.innerHTML = "Merci ! Votre réservation a été reçue."
-    validateMessage.style.color = 'green'
-
+    thankyouDiv.style.display = "flex";
+    formDiv[0].style.display = "none";
   }
 
 });
@@ -154,6 +159,8 @@ function isTermsChecked() {
     return false;
   }
 }
+
+
 
 // send form
 function validate(event) {

@@ -75,6 +75,16 @@ img {
   display: none;
 }
 
+#thankyou-page {
+  height: 60vh;
+  margin-top: 20vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20%;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
 
   .topnav {
@@ -373,7 +383,8 @@ input[data-error]::after {
 }
 
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -383,6 +394,10 @@ input[data-error]::after {
   color: #fff;
   cursor: pointer;
   border: 0;
+}
+
+.btn-close {
+  margin: 0;
 }
 
 /* custom select styles */
