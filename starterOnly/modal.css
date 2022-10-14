@@ -109,9 +109,18 @@ img {
   .header-logo img {
     width: 60%;
   }
+
+  .bground {
+    top: 87px !important;
+    background-color: transparent !important;
+  }
+
+  .content {
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
 }
-
-
 
 @media screen and (max-width: 540px) {
   .topnav a {
@@ -536,6 +545,16 @@ footer {
 }
 
 @media screen and (max-width: 946px) {
+  /* .bground {
+    top: 0;
+    background-color: rgba(26, 39, 156, 0.4);
+  }
+
+  .content {
+    max-width: 500px;
+    margin: 5% auto;
+  } */
+
   .hero-section {
     display: block;
     box-shadow: unset;
