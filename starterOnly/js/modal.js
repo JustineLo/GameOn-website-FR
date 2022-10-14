@@ -82,12 +82,15 @@ submitBtn.addEventListener("click", function (event) {
 
 });
 
+
+// display error message under concerned field
 function displayErrorMessage(input, message) {
   const formData = input.parentNode;
   formData.setAttribute("data-error-visible", true)
   formData.setAttribute("data-error", message)
 }
 
+// remove error message if field is validated
 function removeErrorMessage(input) {
   const formData = input.parentNode;
   formData.setAttribute("data-error-visible", false)
@@ -160,7 +163,6 @@ function isTermsChecked() {
     return false;
   }
 }
-
 
 
 // send form
