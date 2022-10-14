@@ -39,7 +39,7 @@ function closeModal() {
 
 // launch submit button event
 submitBtn.addEventListener("click", function (event) {
-  $isFormValid = true;
+  let $isFormValid = true;
 
   if (!isValidText(firstInput)) {
     $isFormValid = false;
@@ -65,16 +65,15 @@ submitBtn.addEventListener("click", function (event) {
     $isFormValid = false;
   }
 
+  event.preventDefault();
+
   if ($isFormValid) {
-    event.preventDefault();
     const validateMessage = submitBtn.parentNode.insertBefore(document.createElement("div"), submitBtn.nextSibling)
     validateMessage.innerHTML = "Merci ! Votre réservation a été reçue."
     validateMessage.style.color = 'green'
 
-  } else {
-    // prevent page from reloading 
-    event.preventDefault();
   }
+
 });
 
 function displayErrorMessage(input, message) {
