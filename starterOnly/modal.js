@@ -47,34 +47,34 @@ function closeModal() {
 
 // launch submit button event
 submitBtn.addEventListener("click", function (event) {
-  let $isFormValid = true;
+  let isFormValid = true;
 
   if (!isValidText(firstInput)) {
-    $isFormValid = false;
+    isFormValid = false;
   }
   if (!isValidText(lastInput)) {
-    $isFormValid = false;
+    isFormValid = false;
   }
   if (!isValidEmail()) {
-    $isFormValid = false;
+    isFormValid = false;
   }
 
   if (!isValidBirthdate()) {
-    $isFormValid = false;
+    isFormValid = false;
   }
 
   if (!isValidQuantity(quantityInput)) {
-    $isFormValid = false;
+    isFormValid = false;
   }
   if (!isCityChecked()) {
-    $isFormValid = false;
+    isFormValid = false;
   }
   if (!isTermsChecked()) {
-    $isFormValid = false;
+    isFormValid = false;
   }
 
   event.preventDefault();
-  if ($isFormValid) {
+  if (isFormValid) {
     thankyouDiv.style.display = "flex";
     formDiv[0].style.display = "none";
     formDiv[0].reset();
@@ -106,7 +106,7 @@ function isValidText(input) {
 
 // test if email is valid
 function isValidEmail() {
-  if (emailInput != null && emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
+  if (emailInput != null && (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/).test(emailInput.value)) {
     removeErrorMessage(emailInput)
     return true
   } else {
@@ -129,7 +129,7 @@ function isValidBirthdate() {
 
 // test is quantity is number
 function isValidQuantity() {
-  if (quantityInput != null && quantityInput.value.match(/^\d{1,}$/)) {
+  if (quantityInput != null && (/^\d{1,}$/).test(quantityInput.value)) {
     removeErrorMessage(quantityInput)
     return true
   } else {
