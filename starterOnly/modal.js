@@ -30,8 +30,8 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  thankyouDiv.style.display = "none";
   formDiv[0].style.display = "block";
+  thankyouDiv.style.display = "none";
 }
 
 // launch close button event
@@ -77,6 +77,7 @@ submitBtn.addEventListener("click", function (event) {
   if ($isFormValid) {
     thankyouDiv.style.display = "flex";
     formDiv[0].style.display = "none";
+    formDiv[0].reset();
   }
 
 });
